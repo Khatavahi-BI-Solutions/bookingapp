@@ -3,6 +3,12 @@
 
 frappe.ui.form.on('Book Service', {
 	refresh: function(frm) {
-
+		frm.set_query("item", "book_item", function(doc, cdt, cdn){
+			return {
+				filters: {
+					"booking_item": 1
+				}
+			};
+		});     
 	}
 });
