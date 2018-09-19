@@ -6,11 +6,11 @@ from __future__ import unicode_literals
 import frappe
 from frappe.model.document import Document
 from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
-
 class BookServiceSetting(Document):
 	def validate(self):
 		if self.enable == 1:
 			setup_custom_fields()
+			setup_custom_script()
 
 def setup_custom_fields():
 	custom_fields = {
@@ -32,21 +32,20 @@ def setup_custom_fields():
 
 	create_custom_fields(custom_fields)
 
-def make_booking_service_item(doc, method):
-	book_service_setting = frappe.get_doc("Book Service Setting")
-	if doc.booking_item == 1 and not doc.service_item:
-		create_service_item(doc, book_service_setting)
-
-def create_service_item(item, book_service_setting):
-	service_item = frappe.new_doc("Item")
-	service_item.update({
-		"item_code": item.name + "_service",
-		"item_group": book_service_setting.service_item_group,
-		"stock_uom": book_service_setting.default_unit_of_measure,
-		"is_stock_item": 0
-	})
-	service_item.save(ignore_permissions=True)
-	frappe.db.commit()
-	item.service_item = service_item.name
-	item.save(ignore_permissions=True)
-	frappe.db.commit()
+def setup_custom_script(ignore_validate = False):
+	if not frappe.db.exists("Custom Script", "Item-Client"):
+		custom_script = frappe.get_doc({
+				"doctype":"Custom Script",
+				"dt": "Item",
+				"script": """
+					frappe.ui.form.on('Item', {
+						booking_item: function(frm) {
+							if(frm.doc.booking_item == 0){
+								frm.doc.service_item = ""
+							}
+						}
+					})
+				"""
+			})
+		custom_script.flags.ignore_validate = ignore_validate
+		custom_script.insert()
