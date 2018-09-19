@@ -8,7 +8,7 @@
  "custom": 0,
  "docstatus": 0,
  "doctype": "DocType",
- "document_type": "",
+ "document_type": "Setup",
  "editable_grid": 1,
  "engine": "InnoDB",
  "fields": [
@@ -55,7 +55,7 @@
  "issingle": 1,
  "istable": 0,
  "max_attachments": 0,
- "modified": "2018-09-19 14:36:46.084483",
+ "modified": "2018-09-19 14:59:46.945260",
  "modified_by": "Administrator",
  "module": "Booking Service App",
  "name": "Book Service Setting",
@@ -88,6 +88,7 @@
  "show_name_in_global_search": 0,
  "sort_field": "modified",
  "sort_order": "DESC",
+ "title_field": "",
  "track_changes": 1,
  "track_seen": 0,
  "track_views": 0

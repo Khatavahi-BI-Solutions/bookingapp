@@ -86,7 +86,11 @@ app_license = "MIT"
 # 		"on_trash": "method"
 #	}
 # }
-
+doc_events = {
+    "Item": {
+        "on_update":"bookingapp.booking_service_app.doctype.book_service_setting.book_service_setting.make_booking_service_item"
+    }
+}
 # Scheduled Tasks
 # ---------------
 
