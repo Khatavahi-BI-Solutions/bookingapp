@@ -55,5 +55,20 @@ frappe.ui.form.on('Book Service Item', {
 				})
 			}
 		})
-	}
+	},
+	delivery_date: function(frm, cdt, cdn) {
+		calculate_qty(frm, cdt, cdn);
+	},
+	return_date: function(frm, cdt, cdn) {
+		calculate_qty(frm, cdt, cdn);
+	},
 })
+
+var calculate_qty= function(frm, cdt, cdn) {
+	var child = locals[cdt][cdn];
+	var diff = frappe.datetime.get_hour_diff(child.return_date,child.delivery_date);
+	if(child.stock_uom == "Day"){
+		diff = Math.ceil(diff/24);
+	} 
+	frappe.model.set_value(child.doctype, child.name, "quantity", diff);
+}
