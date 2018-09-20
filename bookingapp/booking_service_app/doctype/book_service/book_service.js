@@ -12,3 +12,21 @@ frappe.ui.form.on('Book Service', {
 		});     
 	}
 });
+
+frappe.ui.form.on('Book Service Item', {
+	item: function(frm, cdt, cdn) {
+		var child = locals[cdt][cdn];
+		cur_frm.call({
+			"method": "frappe.client.get_value",
+			"args": {
+				"doctype": "Item",
+				"filters": {
+					"name":  child.item
+				},
+				"fieldname": "service_item"
+			},
+			"child": child,
+			"fieldname": "service_item"
+		})
+	}
+})
