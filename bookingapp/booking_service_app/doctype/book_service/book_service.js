@@ -40,7 +40,6 @@ frappe.ui.form.on('Book Service Item', {
 			"child": child,
 			"fieldname": "image",
 			callback: function(r) {
-				console.log(r)
 				cur_frm.call({
 					"method": "frappe.client.get_value",
 					"args": {
@@ -51,10 +50,14 @@ frappe.ui.form.on('Book Service Item', {
 						"fieldname": "stock_uom"
 					},
 					"child": child,
-					"fieldname": "stock_uom"
-				})
+					"fieldname": "stock_uom",
+					callback: function(r) {
+						get_item_price_rate(frm, cdt, cdn);
+					}
+				})	
 			}
 		})
+		
 	},
 	delivery_date: function(frm, cdt, cdn) {
 		calculate_qty(frm, cdt, cdn);
@@ -62,7 +65,31 @@ frappe.ui.form.on('Book Service Item', {
 	return_date: function(frm, cdt, cdn) {
 		calculate_qty(frm, cdt, cdn);
 	},
+	rate: function(frm, cdt, cdn) {
+		var child = locals[cdt][cdn];
+		frappe.model.set_value(child.doctype, child.name, "amount", child.rate*child.quantity);
+	}
 })
+
+var get_item_price_rate= function(frm, cdt, cdn) {
+	var child = locals[cdt][cdn];
+
+	frappe.model.get_value('Item Price', 
+		{
+			'item_code': child.service_item,
+			'price_list': "Standard Selling",
+			'selling': 1
+		}, 
+		'price_list_rate',
+		function(d) {
+			if(d) {
+				frappe.model.set_value(child.doctype, child.name, "rate", d.price_list_rate);
+			}else{
+				frappe.model.set_value(child.doctype, child.name, "rate", "0");
+			}
+		}
+	)
+}
 
 var calculate_qty= function(frm, cdt, cdn) {
 	var child = locals[cdt][cdn];
@@ -71,4 +98,5 @@ var calculate_qty= function(frm, cdt, cdn) {
 		diff = Math.ceil(diff/24);
 	} 
 	frappe.model.set_value(child.doctype, child.name, "quantity", diff);
+	frappe.model.set_value(child.doctype, child.name, "amount", child.rate*child.quantity);
 }
