@@ -4,6 +4,7 @@
 ### ERPNext Renting Business App
 # `Installation:`
 1 bench get-app https://github.com/jigartarpara/bookingapp
+
 2 bench --site `site-name` install-app bookingapp
 # `Structure`
 1 `Book Service Setting` Document
@@ -14,4 +15,4 @@
 - So now you can select this item in `Book Service` table for booking item for perticular Interval
 
 # Support
-Mail your Query Here [Jigar Tarpara](mail_to:jigartarpara68@gmail.com)
+Mail your Query Here [jigartarpara68@gmail.com](mail_to:jigartarpara68@gmail.com)
