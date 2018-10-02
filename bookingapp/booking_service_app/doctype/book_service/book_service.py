@@ -7,4 +7,5 @@ import frappe
 from frappe.model.document import Document
 
 class BookService(Document):
-	pass
+	def validate_booking_date(self):
+		return True
