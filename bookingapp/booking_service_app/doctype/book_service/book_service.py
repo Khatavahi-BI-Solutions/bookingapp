@@ -61,5 +61,8 @@ class BookService(Document):
 			
 			for booking in bookings:
 				return "Already Booked: ID "+ booking.parent + " \n"+ str(filters)
+			
+			if return_date<delivery_date:
+				return "Return date should be after delivery date"
 
 		return False
