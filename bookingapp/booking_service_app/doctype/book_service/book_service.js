@@ -53,6 +53,7 @@ frappe.ui.form.on('Book Service Item', {
 					"fieldname": "stock_uom",
 					callback: function(r) {
 						get_item_price_rate(frm, cdt, cdn);
+						calculate_qty(frm, cdt, cdn);
 					}
 				})	
 			}
@@ -60,12 +61,12 @@ frappe.ui.form.on('Book Service Item', {
 		
 	},
 	delivery_date: function(frm, cdt, cdn) {
-		validate_booking_date(frm, cdt, cdn);
 		calculate_qty(frm, cdt, cdn);
+		validate_booking_date(frm, cdt, cdn);
 	},
 	return_date: function(frm, cdt, cdn) {
-		validate_booking_date(frm, cdt, cdn);
 		calculate_qty(frm, cdt, cdn);
+		validate_booking_date(frm, cdt, cdn);
 	},
 	rate: function(frm, cdt, cdn) {
 		var child = locals[cdt][cdn];
@@ -108,7 +109,7 @@ var validate_booking_date = function(frm, cdt, cdn) {
 		"method": "validate_booking_date",
 		doc: cur_frm.doc,
 		callback: function (r) {
-			alert(r.message)
+			
 		}
 	})
 }
