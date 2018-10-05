@@ -9,9 +9,21 @@ frappe.ui.form.on('Book Service', {
 					"booking_item": 1
 				}
 			};
-		});     
+		});   
+		if(frm.doc.docstatus == 1){
+			cur_frm.add_custom_button(__('Sales Order'),
+				cur_frm.cscript['Make Sales Order'], __("Make"));
+			cur_frm.page.set_inner_btn_group_as_primary(__("Make"));
+		}
 	}
 });
+
+cur_frm.cscript['Make Sales Order'] = function() {
+	frappe.model.open_mapped_doc({
+		method: "bookingapp.booking_service_app.doctype.book_service.book_service.make_sales_order",
+		frm: cur_frm
+	})
+}
 
 frappe.ui.form.on('Book Service Item', {
 	item: function(frm, cdt, cdn) {
