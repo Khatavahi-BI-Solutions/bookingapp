@@ -62,11 +62,11 @@ frappe.ui.form.on('Book Service Item', {
 	},
 	delivery_date: function(frm, cdt, cdn) {
 		calculate_qty(frm, cdt, cdn);
-		validate_booking_date(frm, cdt, cdn);
+		validate_booking_date(frm, cdt, cdn, "delivery_date");
 	},
 	return_date: function(frm, cdt, cdn) {
 		calculate_qty(frm, cdt, cdn);
-		validate_booking_date(frm, cdt, cdn);
+		validate_booking_date(frm, cdt, cdn, "return_date");
 	},
 	rate: function(frm, cdt, cdn) {
 		var child = locals[cdt][cdn];
@@ -104,12 +104,16 @@ var calculate_qty= function(frm, cdt, cdn) {
 	frappe.model.set_value(child.doctype, child.name, "amount", child.rate*child.quantity);
 }
 
-var validate_booking_date = function(frm, cdt, cdn) {
+var validate_booking_date = function(frm, cdt, cdn,  execution_point = "") {
 	frappe.call({
 		"method": "validate_booking_date",
 		doc: cur_frm.doc,
 		callback: function (r) {
-			
+			if(r.message){
+				var child = locals[cdt][cdn];
+				frappe.msgprint(r.message)
+				frappe.model.set_value(child.doctype, child.name, execution_point,"");
+			}	
 		}
 	})
 }
