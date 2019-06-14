@@ -4,6 +4,8 @@
 
 from __future__ import unicode_literals
 import frappe
+from frappe.model.mapper import get_mapped_doc
+from frappe.utils import flt, nowdate, getdate
 from frappe.model.document import Document
 
 class BookService(Document):
@@ -69,28 +71,29 @@ class BookService(Document):
 
 @frappe.whitelist()
 def make_sales_order(source_name, target_doc=None):
-	customer = _make_customer(source_name, ignore_permissions)
-
+	cst = frappe.db.get_value("Book Service", source_name, ["customer"])
+	customer = frappe.db.get_value("Customer", {"name": cst}, ["name", "customer_name"], as_dict=True)
+	
 	def set_missing_values(source, target):
 		if customer:
 			target.customer = customer.name
 			target.customer_name = customer.customer_name
 		target.ignore_pricing_rule = 1
-		target.flags.ignore_permissions = ignore_permissions
+		target.flags.ignore_permissions = True
 		target.run_method("set_missing_values")
 		target.run_method("calculate_taxes_and_totals")
 
 	def update_item(obj, target, source_parent):
-		target.stock_qty = flt(obj.qty) * flt(obj.conversion_factor)
+		target.stock_qty = flt(obj.quantity)
 
-	doclist = get_mapped_doc("Quotation", source_name, {
-			"Quotation": {
+	doclist = get_mapped_doc("Book Service", source_name, {
+			"Book Service": {
 				"doctype": "Sales Order",
 				"validation": {
 					"docstatus": ["=", 1]
 				}
 			},
-			"Quotation Item": {
+			"Book Service Item": {
 				"doctype": "Sales Order Item",
 				"field_map": {
 					"parent": "prevdoc_docname"
@@ -105,7 +108,7 @@ def make_sales_order(source_name, target_doc=None):
 				"doctype": "Sales Team",
 				"add_if_empty": True
 			}
-		}, target_doc, set_missing_values, ignore_permissions=ignore_permissions)
+		}, target_doc, set_missing_values, ignore_permissions=True)
 
 	# postprocess: fetch shipping address, set missing values
 
