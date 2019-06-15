@@ -23,7 +23,7 @@ cur_frm.cscript['Make Sales Order'] = function() {
 		method: "bookingapp.booking_service_app.doctype.book_service.book_service.make_sales_order",
 		frm: cur_frm
 	})
-}
+};
 
 frappe.ui.form.on('Book Service Item', {
 	item: function(frm, cdt, cdn) {
