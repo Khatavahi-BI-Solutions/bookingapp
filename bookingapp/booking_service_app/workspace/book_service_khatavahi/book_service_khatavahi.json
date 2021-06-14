@@ -1,6 +1,13 @@
 {
+ "cards_label": "Booking Docs",
  "category": "Modules",
- "charts": [],
+ "charts": [
+  {
+   "chart_name": "Booking Status",
+   "label": "Booking Stats"
+  }
+ ],
+ "charts_label": "Booking Status",
  "creation": "2021-06-14 20:42:38.082406",
  "developer_mode_only": 0,
  "disable_user_customization": 0,
@@ -8,17 +15,70 @@
  "doctype": "Workspace",
  "extends_another_page": 0,
  "hide_custom": 0,
+ "icon": "support",
  "idx": 0,
  "is_default": 0,
  "is_standard": 1,
  "label": "Book Service Khatavahi",
- "links": [],
- "modified": "2021-06-14 20:42:38.082406",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Booking Service",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Book Service",
+   "link_to": "Book Service",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Item",
+   "link_to": "Item",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Stock",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Stock Entry",
+   "link_to": "Stock Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2021-06-14 21:01:16.528703",
  "modified_by": "Administrator",
  "module": "Booking Service App",
  "name": "Book Service Khatavahi",
  "owner": "Administrator",
  "pin_to_bottom": 0,
- "pin_to_top": 0,
- "shortcuts": []
+ "pin_to_top": 1,
+ "shortcuts": [
+  {
+   "doc_view": "New",
+   "label": "Create Booking",
+   "link_to": "Book Service",
+   "type": "DocType"
+  }
+ ],
+ "shortcuts_label": "Quick Booking"
 }
