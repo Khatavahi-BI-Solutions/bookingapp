@@ -129,3 +129,48 @@ def make_sales_order(source_name, target_doc=None):
     # postprocess: fetch shipping address, set missing values
 
     return doclist
+
+
+@frappe.whitelist()
+def get_book_service_details(start, end, filters=None):
+    events = []
+
+    event_color = {
+        0: "#ffdd9e",
+        1: "#cdf5a6",
+        2: "#8a0404"
+    }
+
+    from frappe.desk.reportview import get_filters_cond
+    conditions = get_filters_cond("Book Service", filters, [])
+
+    bookservices = frappe.db.sql(""" SELECT `tabBook Service`.name,`tabBook Service`.docstatus, `tabBook Service`.customer,
+			ifnull(`tabBook Service Item`.note, ''),
+			min(`tabBook Service Item`.delivery_date) as from_time,
+			max(`tabBook Service Item`.return_date) as to_time
+		FROM `tabBook Service` , `tabBook Service Item`
+		WHERE
+			`tabBook Service`.name = `tabBook Service Item`.parent {0}
+			group by `tabBook Service`.name""".format(conditions), as_dict=1)
+
+    for d in bookservices:
+        subject_data = []
+        for field in ["name", "customer", "item", "note"]:
+            if not d.get(field):
+                continue
+
+            subject_data.append(d.get(field))
+
+        color = event_color.get(d.docstatus)
+        # color = "#cdf5a6"
+        job_card_data = {
+            'from_time': d.from_time,
+            'to_time': d.to_time,
+            'name': d.name,
+            'subject': '\n'.join(subject_data),
+            'color': color if color else "#89bcde"
+        }
+
+        events.append(job_card_data)
+
+    return events
