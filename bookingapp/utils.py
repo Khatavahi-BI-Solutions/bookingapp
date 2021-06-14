@@ -2,10 +2,12 @@
 # For license information, please see license.txt
 import frappe
 
+
 def make_booking_service_item(doc, method):
-	book_service_setting = frappe.get_doc("Book Service Setting")
-	if doc.booking_item == 1 and not doc.service_item:
-		create_service_item(doc, book_service_setting)
+    book_service_setting = frappe.get_doc("Khatavahi Book Service Setting")
+    if doc.booking_item == 1 and not doc.service_item:
+        create_service_item(doc, book_service_setting)
+
 
 def create_service_item(item, book_service_setting):
     if not frappe.db.exists("Item", item.name + "_service"):
@@ -23,4 +25,3 @@ def create_service_item(item, book_service_setting):
         item.service_item = item.name + "_service"
         item.save(ignore_permissions=True)
     frappe.db.commit()
-    
