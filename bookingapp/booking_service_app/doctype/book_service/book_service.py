@@ -11,19 +11,20 @@ from frappe.model.document import Document
 
 class BookService(Document):
     def validate(self):
-        self.validate_booking_date()
+        msg = self.validate_booking_date()
+        if msg:
+            frappe.throw(msg)
 
     @frappe.whitelist()
     def validate_booking_date(self):
         for row in self.book_item:
-            is_booked = self.check_item_is_booked(
-                row.delivery_date, row.return_date, row.item)
+            is_booked = self.check_item_is_booked(row)
             if is_booked:
                 return is_booked
         return ""
 
-    def check_item_is_booked(self, delivery_date, return_date, item):
-
+    def check_item_is_booked(self, row):
+        delivery_date, return_date, item = row.delivery_date, row.return_date, row.item
         if delivery_date:
             filters = {}
             filters = {'item': item, 'docstatus': 1}
@@ -31,6 +32,7 @@ class BookService(Document):
             filters.update({'delivery_date': ['<=', delivery_date]})
             filters.update({'return_date': ['>=', delivery_date]})
             filters.update({'docstatus': ['!=', 2]})
+            filters.update({'name': ['!=', row.name]})
 
             bookings = frappe.get_all('Book Service Item', filters=filters, fields=[
                                       'name', 'delivery_date', 'return_date', 'parent'])
@@ -44,6 +46,7 @@ class BookService(Document):
             filters.update({'delivery_date': ['<=', return_date]})
             filters.update({'return_date': ['>=', return_date]})
             filters.update({'docstatus': ['!=', 2]})
+            filters.update({'name': ['!=', row.name]})
 
             bookings = frappe.get_all('Book Service Item', filters=filters, fields=[
                                       'name', 'delivery_date', 'return_date', 'parent'])
@@ -55,6 +58,7 @@ class BookService(Document):
 
             filters = {}
             filters = {'item': item, 'docstatus': 1}
+            filters.update({'name': ['!=', row.name]})
             filters.update(
                 {'delivery_date': ['between', delivery_date+" and " + return_date]})
 
@@ -66,6 +70,7 @@ class BookService(Document):
 
             filters = {}
             filters = {'item': item, 'docstatus': 1}
+            filters.update({'name': ['!=', row.name]})
             filters.update(
                 {'return_date': ['between', delivery_date+" and " + return_date]})
 
