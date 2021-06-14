@@ -1,8 +1,8 @@
 {
+ "actions": [],
  "allow_import": 1,
  "allow_rename": 1,
  "autoname": "naming_series:",
- "beta": 1,
  "creation": "2018-09-19 13:16:47.522970",
  "doctype": "DocType",
  "document_type": "Document",
@@ -71,7 +71,8 @@
   }
  ],
  "is_submittable": 1,
- "modified": "2020-12-17 17:29:42.285477",
+ "links": [],
+ "modified": "2021-06-14 14:13:09.872293",
  "modified_by": "Administrator",
  "module": "Booking Service App",
  "name": "Book Service",

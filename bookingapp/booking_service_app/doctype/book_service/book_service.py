@@ -30,6 +30,7 @@ class BookService(Document):
 
             filters.update({'delivery_date': ['<=', delivery_date]})
             filters.update({'return_date': ['>=', delivery_date]})
+            filters.update({'docstatus': ['!=', 2]})
 
             bookings = frappe.get_all('Book Service Item', filters=filters, fields=[
                                       'name', 'delivery_date', 'return_date', 'parent'])
@@ -42,6 +43,7 @@ class BookService(Document):
             filters = {'item': item, 'docstatus': 1}
             filters.update({'delivery_date': ['<=', return_date]})
             filters.update({'return_date': ['>=', return_date]})
+            filters.update({'docstatus': ['!=', 2]})
 
             bookings = frappe.get_all('Book Service Item', filters=filters, fields=[
                                       'name', 'delivery_date', 'return_date', 'parent'])
