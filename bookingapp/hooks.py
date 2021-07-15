@@ -88,7 +88,7 @@ app_license = "MIT"
 # }
 doc_events = {
     "Item": {
-        "on_update":"bookingapp.utils.make_booking_service_item"
+        "on_update": "bookingapp.utils.make_booking_service_item"
     }
 }
 # Scheduled Tasks
@@ -123,4 +123,3 @@ doc_events = {
 # override_whitelisted_methods = {
 # 	"frappe.desk.doctype.event.event.get_events": "bookingapp.event.get_events"
 # }
-
