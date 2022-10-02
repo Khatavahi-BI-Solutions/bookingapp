@@ -13,7 +13,6 @@ class KhatavahiBookServiceSetting(Document):
     def validate(self):
         if self.enable == 1:
             setup_custom_fields()
-            setup_custom_script()
 
 
 def setup_custom_fields():
@@ -45,24 +44,3 @@ def setup_custom_fields():
 
     create_custom_fields(custom_fields)
     frappe.msgprint("Custom Field Updated!")
-
-
-def setup_custom_script(ignore_validate=False):
-    if not frappe.db.exists("Client Script", "Item-Client"):
-        custom_script = frappe.get_doc({
-            "doctype": "Client Script",
-            "name": "Rental Module",
-            "dt": "Item",
-            "enabled": True,
-            "script": """
-					frappe.ui.form.on('Item', {
-						booking_item: function(frm) {
-							if(frm.doc.booking_item == 0){
-								frm.doc.service_item = ""
-							}
-						}
-					})
-				"""
-        })
-        custom_script.flags.ignore_validate = ignore_validate
-        custom_script.insert()
