@@ -24,7 +24,7 @@ app_license = "MIT"
 
 # include js in page
 # page_js = {"page" : "public/js/file.js"}
-
+doctype_js = {"Item" : "public/js/bookingapp_item.js"}
 # include js in doctype views
 # doctype_js = {"doctype" : "public/js/doctype.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
@@ -88,7 +88,7 @@ app_license = "MIT"
 # }
 doc_events = {
     "Item": {
-        "on_update": "bookingapp.utils.make_booking_service_item"
+        "validate": "bookingapp.utils.make_booking_service_item"
     }
 }
 # Scheduled Tasks
