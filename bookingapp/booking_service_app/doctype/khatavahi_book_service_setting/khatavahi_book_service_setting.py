@@ -51,7 +51,9 @@ def setup_custom_script(ignore_validate=False):
     if not frappe.db.exists("Client Script", "Item-Client"):
         custom_script = frappe.get_doc({
             "doctype": "Client Script",
+            "name": "Rental Module",
             "dt": "Item",
+            "enabled": True,
             "script": """
 					frappe.ui.form.on('Item', {
 						booking_item: function(frm) {
