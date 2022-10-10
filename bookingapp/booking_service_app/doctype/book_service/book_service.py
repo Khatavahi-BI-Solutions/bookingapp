@@ -103,6 +103,7 @@ def make_sales_order(source_name, target_doc=None):
 
 	def update_item(obj, target, source_parent):
 		target.stock_qty = flt(obj.quantity)
+		target.qty = flt(obj.quantity)
 
 	doclist = get_mapped_doc("Book Service", source_name, {
 		"Book Service": {
@@ -117,9 +118,12 @@ def make_sales_order(source_name, target_doc=None):
 		"Book Service Item": {
 			"doctype": "Sales Order Item",
 			"field_map": {
-				"service_item": "item_code"
+				"service_item": "item_code",
+				"quantity": "stock_qty",
+				"quantity": "qty",
+				"delivery_date": "delivery_date"
 			},
-			"postprocess": update_item
+			# "postprocess": update_item
 		},
 		"Sales Taxes and Charges": {
 			"doctype": "Sales Taxes and Charges",
