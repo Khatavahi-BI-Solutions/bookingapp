@@ -99,8 +99,13 @@
   }
  ],
  "is_submittable": 1,
- "links": [],
- "modified": "2022-10-02 17:53:30.534246",
+ "links": [
+  {
+   "link_doctype": "Sales Order",
+   "link_fieldname": "book_service"
+  }
+ ],
+ "modified": "2022-10-10 11:19:31.363699",
  "modified_by": "Administrator",
  "module": "Booking Service App",
  "name": "Book Service",
