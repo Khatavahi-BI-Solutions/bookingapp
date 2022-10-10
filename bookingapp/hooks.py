@@ -91,6 +91,7 @@ doc_events = {
         "validate": "bookingapp.utils.make_booking_service_item"
     }
 }
+after_migrate = "bookingapp.booking_service_app.doctype.khatavahi_book_service_setting.khatavahi_book_service_setting.setup_custom_fields"
 # Scheduled Tasks
 # ---------------
 

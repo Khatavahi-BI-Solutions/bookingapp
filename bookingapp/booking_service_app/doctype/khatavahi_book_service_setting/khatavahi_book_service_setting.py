@@ -9,10 +9,7 @@ from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
 
 
 class KhatavahiBookServiceSetting(Document):
-
-    def validate(self):
-        if self.enable == 1:
-            setup_custom_fields()
+    pass
 
 
 def setup_custom_fields():
@@ -29,6 +26,13 @@ def setup_custom_fields():
                  insert_after='booking_item',
                  options='Item',
                  depends_on='eval:doc.booking_item',
+                 read_only=0, print_hide=1),
+            dict(fieldname='is_service_item',
+                 label='Is Service Item',
+                 fieldtype='Check',
+                 insert_after='service_item',
+                 options='Item',
+                 depends_on='eval:!doc.booking_item',
                  read_only=0, print_hide=1)
         ],
         "Sales Order": [
