@@ -6,8 +6,6 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "enable",
-  "section_break_2",
   "service_item_group",
   "default_unit_of_measure",
   "column_break_5",
@@ -15,26 +13,20 @@
  ],
  "fields": [
   {
-   "default": "0",
-   "fieldname": "enable",
-   "fieldtype": "Check",
-   "label": "Enable"
-  },
-  {
-   "fieldname": "section_break_2",
-   "fieldtype": "Section Break"
-  },
-  {
    "fieldname": "service_item_group",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Service Item Group",
-   "options": "Item Group"
+   "options": "Item Group",
+   "reqd": 1
   },
   {
    "fieldname": "default_unit_of_measure",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Default Unit of Measure",
-   "options": "UOM"
+   "options": "UOM",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_5",
@@ -43,13 +35,15 @@
   {
    "fieldname": "price_list",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Price List",
-   "options": "Price List"
+   "options": "Price List",
+   "reqd": 1
   }
  ],
  "issingle": 1,
  "links": [],
- "modified": "2021-06-14 14:13:01.345214",
+ "modified": "2022-10-10 10:41:22.048816",
  "modified_by": "Administrator",
  "module": "Booking Service App",
  "name": "Khatavahi Book Service Setting",
@@ -69,5 +63,6 @@
  "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }
