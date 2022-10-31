@@ -2,6 +2,13 @@
 
 [Give Your Feedback Here](https://khatavahi.in/app-feedback/new)
 
+[Contact Us](mailto:jigartarpara@khatavahi.in)
+
+[Jigar Tarpara](https://jigartarpara.com/)
+
+[Khatavahi BI Solutions LLP](https://khatavahi.in/)
+
+
 ### For Renting Business
 
 ### Booking Any type of Service
