@@ -43,7 +43,7 @@
  ],
  "issingle": 1,
  "links": [],
- "modified": "2022-10-10 10:41:22.048816",
+ "modified": "2025-07-29 11:49:39.062131",
  "modified_by": "Administrator",
  "module": "Booking Service App",
  "name": "Khatavahi Book Service Setting",
@@ -61,6 +61,7 @@
   }
  ],
  "quick_entry": 1,
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
