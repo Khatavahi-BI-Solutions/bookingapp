@@ -21,6 +21,7 @@
    "reqd": 1
   },
   {
+   "description": "In which UOM you planning to give goods on rent like Day/Month/Hour",
    "fieldname": "default_unit_of_measure",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -43,7 +44,7 @@
  ],
  "issingle": 1,
  "links": [],
- "modified": "2025-09-24 10:12:15.237723",
+ "modified": "2025-09-24 12:23:31.212258",
  "modified_by": "Administrator",
  "module": "Booking Service App",
  "name": "Khatavahi Book Service Setting",
