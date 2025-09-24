@@ -18,7 +18,7 @@ def setup_custom_fields():
             dict(fieldname='is_service_item',
                  label='Is Service Item',
                  fieldtype='Check',
-                 insert_after='service_item',
+                 insert_after='service_item_of',
                  options='Item',
                  read_only=1, print_hide=1)
         ],

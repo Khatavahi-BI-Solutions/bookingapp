@@ -21,7 +21,8 @@ def create_service_item(item):
             "stock_uom": book_service_setting.default_unit_of_measure,
             "service_item_of": item.name,
             "is_stock_item": False,
-            "is_service_item": True
+            "is_service_item": True,
+            "gst_hsn_code": book_service_setting.hsn_code
         })
         service_item.save(ignore_permissions=True)
     if item.image:
