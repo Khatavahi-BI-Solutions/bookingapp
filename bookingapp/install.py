@@ -23,13 +23,6 @@ def setup_custom_fields():
                  read_only=1, print_hide=1)
         ],
         "Sales Order": [
-            dict(fieldname='book_service',
-                 label='Book Service',
-                 fieldtype='Link',
-                 insert_after='customer_name',
-                 read_only=0,
-                 options='Book Service'
-                 ),
         ]
     }
 

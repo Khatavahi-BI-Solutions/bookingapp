@@ -25,7 +25,8 @@ app_license = "MIT"
 # include js in page
 # page_js = {"page" : "public/js/file.js"}
 doctype_js = {
-    "Item" : "public/js/bookingapp_item.js"
+    "Item" : "public/js/bookingapp_item.js",
+    "Sales Order" : "public/js/bookingapp_sales_order.js"
 }
 # include js in doctype views
 # doctype_js = {"doctype" : "public/js/doctype.js"}
@@ -90,7 +91,7 @@ doctype_js = {
 # }
 doc_events = {
     "Item": {
-        "validate": "bookingapp.utils.make_booking_service_item"
+        "validate": "bookingapp.override.item.validate"
     }
 }
 after_migrate = "bookingapp.install.setup_custom_fields"

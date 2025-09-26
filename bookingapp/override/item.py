@@ -1,9 +1,6 @@
-# Copyright (c) 2018, Jigar Tarpara and contributors
-# For license information, please see license.txt
 import frappe
 
-
-def make_booking_service_item(doc, method):
+def validate(doc, method):
     if doc.booking_item == 1:
         create_service_item(doc)
     if doc.is_service_item == 1:
@@ -26,7 +23,8 @@ def create_service_item(item):
         })
         service_item.save(ignore_permissions=True)
     if item.image:
-        frappe.db.set_value("Item",item.service_item, "image",item.image)
+        service_item = frappe.db.get_value("Item", {"service_item_of":item.name}, "name")
+        frappe.db.set_value("Item", service_item, "image",item.image)
 
 def validate_service_item(doc):
     if doc.service_item_of:
